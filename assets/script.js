@@ -4,7 +4,7 @@ var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=44.8041&lon=
 var city = $('#city');
 var temp = $('#temp');
 var humidity = $('#humidity');
-var windSpeed = $('#windspeed');
+var windSpeed = $('#windSpeed');
 var conditonsIcon = $('#conditionsIcon');
 var date = $('#date');
 var uvi = $('#uvi');
@@ -47,7 +47,10 @@ fetch(queryURL)
       var milliseconds = CUnixDate * 1000
       var dateObject = new Date(milliseconds)
       var humanDate = dateObject.toLocaleString("en-us", {timeZoneName: "short"})
-      console.log(humanDate);
 
-      temp.text('temp: ' + cTemp + '\u00b0');
+      date.text(humanDate);
+      temp.text('Temp: ' + cTemp + '\u00b0');
+      humidity.text('Humidity: ' + cHumidity);
+      windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
+      uvi.text('UV Index: ' + cUvi);
   }

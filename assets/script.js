@@ -24,5 +24,9 @@ fetch(queryURL)
       var temp = data.current.temp
       var humidity = data.current.humidity
       var windSpeed = data.current.wind_speed
-      console.log(windSpeed);
+      var unixDate = data.current.dt
+      var milliseconds = unixDate * 1000
+      var dateObject = new Date(milliseconds)
+      var humanDate = dateObject.toLocaleString("en-us", {timeZoneName: "short"})
+      console.log(humanDate);
   }

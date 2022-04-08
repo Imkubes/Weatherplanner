@@ -70,7 +70,7 @@ function getCords() {
       humidity.text('Humidity: ' + cHumidity);
       windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
       uvi.text('UV Index: ' + cUvi);
-
+// if statement to color code uv index
       if (0 <= cUvi) {
           uvi.attr('style', 'color: green');
       } else if (cUvi >= 3) {

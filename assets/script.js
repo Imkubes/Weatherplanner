@@ -71,6 +71,16 @@ function getCords() {
       windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
       uvi.text('UV Index: ' + cUvi);
 
+      if (0 <= cUvi) {
+          uvi.attr('style', 'color: green');
+      } else if (cUvi >= 3) {
+          uvi.attr('style', 'color: yellow');
+      } else if (cUvi >= 5) {
+          uvi.attr('style', 'color: orange');
+      } else if (cUvi >= 8) {
+          uvi.attr('style', 'color: red');
+      }
+
       fiveDay(data);
   }
 

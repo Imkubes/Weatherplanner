@@ -50,12 +50,12 @@ fetch(queryURL)
       var dateObject = new Date(milliseconds)
       var humanDate = dateObject.toLocaleString("en-us", {timeZoneName: "short"})
 
+      conditonsIcon.attr('src', 'https://openweathermap.org/img/wn/' + cConditionsIcon + '@2x.png')
       date.text(humanDate);
       temp.text('Temp: ' + cTemp + '\u00b0');
       humidity.text('Humidity: ' + cHumidity);
       windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
       uvi.text('UV Index: ' + cUvi);
-      conditonsIcon.text(cConditionsIcon);
 
       fiveDay(data);
   }
@@ -79,6 +79,9 @@ fetch(queryURL)
 
           //Creating a List element to add the data of 5 days to the html doc
           var liEl = $('<li class="fiveDayLi">')
+          var liIcon = $('<img id="conditionsIcon" src="" alt="cWeatherIcon">');
+          liIcon.attr('src', 'https://openweathermap.org/img/wn/' + fiveConditionsIcon + '@2x.png');
+          liEl.append(liIcon);
           var liDate = $('<h3>');
           liDate.text(fiveHumanDate);
           liEl.append(liDate);

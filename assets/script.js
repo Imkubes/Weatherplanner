@@ -11,11 +11,14 @@ var uvi = $('#uvi');
 var lat = $('#lat');
 var lon = $('#lon');
 var fiveDayForecast = $('#fiveDayForecast');
+var recentSearchesEl = $('#recentSearches');
 
-searchBtn.on('click', getCords)
+searchBtn.on('click', getCords);
+searchBtn.on('click', searchHistory);
 
 function getCords() {
     var searchTerm = citySearch.val();
+    localStorage.setItem("city", searchTerm);
     var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=" + APIKey
     fetch(queryURL2)
   .then(function (response) {
@@ -104,4 +107,13 @@ function getCords() {
             //Appending the list to the five day forecast
           fiveDayForecast.append(liEl);
       }
+  }
+
+  function searchHistory() {
+      var searchHistoryData = localStorage.getItem("city");
+      for (var i = 0; i < localStorage.length; i++) {
+          var pastSearch = $('<p>');
+          pastSearch.text(localStorage.getItem("city"));
+      }
+      recentSearchesEl.append(pastSearch);
   }

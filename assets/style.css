@@ -41,6 +41,12 @@ body {
     cursor: pointer;
 }
 
+#recentSearches {
+    margin-left: 130px;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
 
 #currentConditions {
     margin-left: 715px;

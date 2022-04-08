@@ -63,3 +63,21 @@ body {
 #currentConditions #uvi {
     padding-bottom: 5px;
 }
+
+#fiveDayForecast {
+    text-align: center;
+    list-style: none;
+    margin-top: 60px;
+}
+
+#fiveDayForecast .fiveDayLi {
+    background-color: #fff;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+#fiveDayForecast .fiveDayLi h3 {
+    padding-bottom: 5px;
+}

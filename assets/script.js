@@ -10,6 +10,7 @@ var date = $('#date');
 var uvi = $('#uvi');
 var lat = $('#lat');
 var lon = $('#lon');
+var fiveDayForecast = $('#fiveDayForecast');
 
 
 fetch(queryURL2)
@@ -55,28 +56,40 @@ fetch(queryURL)
       windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
       uvi.text('UV Index: ' + cUvi);
       conditonsIcon.text(cConditionsIcon);
+
+      fiveDay(data);
   }
 
   function fiveDay(data) {
-      fiveDay.html("");
+      fiveDayForecast.html("");
 
 
       for (let i = 0; i < 5; i++) {
           var fiveConditionsIcon = data.daily[i].weather[0].icon;
-          var fiveIconURL = "http://openweathermap.org/img/wn/" + fiveConditionsIcon + "@2x.png"
-          var fiveTemp = data.daily[i].temp;
+          var fiveTemp = data.daily[i].temp.day;
           var fiveWind = data.daily[i].wind_speed;
           var fiveHumidity = data.daily[i].humidity;
-          var fiveUVI = date.daily[i].uvi;
-          var fiveUnixDate = date.daily[i].dt;
+          var fiveUVI = data.daily[i].uvi;
+          var fiveUnixDate = data.daily[i].dt;
           var fMilliseconds = fiveUnixDate * 1000;
           var fiveDateObj = new Date(fMilliseconds);
-          var fiveHumanDate = fiveDateObj.toLocaleString("en-us", {timeZoneName: "short"});
+          var fiveHumanDate = fiveDateObj.toLocaleString("en-us", {weekday: "long"});
 
 
-          var liEl = $('<li class="bg-dark text-white flex-fill">')
+          var liEl = $('<li class="fiveDayLi">')
           var liDate = $('<h3>');
           liDate.text(fiveHumanDate);
           liEl.append(liDate);
+          var liTemp = $('<p>');
+          liTemp.text('Temp: ' + fiveTemp + '\u00b0');
+          liEl.append(liTemp);
+          var liWind = $('<p>');
+          liWind.text('Wind Speed: ' + fiveWind);
+          liEl.append(liWind);
+          var liHumidity = $('<p>');
+          liHumidity.text('Humidity: ' + fiveHumidity);
+          liEl.append(liHumidity);
+
+          fiveDayForecast.append(liEl);
       }
   }

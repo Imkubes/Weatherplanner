@@ -56,3 +56,27 @@ fetch(queryURL)
       uvi.text('UV Index: ' + cUvi);
       conditonsIcon.text(cConditionsIcon);
   }
+
+  function fiveDay(data) {
+      fiveDay.html("");
+
+
+      for (let i = 0; i < 5; i++) {
+          var fiveConditionsIcon = data.daily[i].weather[0].icon;
+          var fiveIconURL = "http://openweathermap.org/img/wn/" + fiveConditionsIcon + "@2x.png"
+          var fiveTemp = data.daily[i].temp;
+          var fiveWind = data.daily[i].wind_speed;
+          var fiveHumidity = data.daily[i].humidity;
+          var fiveUVI = date.daily[i].uvi;
+          var fiveUnixDate = date.daily[i].dt;
+          var fMilliseconds = fiveUnixDate * 1000;
+          var fiveDateObj = new Date(fMilliseconds);
+          var fiveHumanDate = fiveDateObj.toLocaleString("en-us", {timeZoneName: "short"});
+
+
+          var liEl = $('<li class="bg-dark text-white flex-fill">')
+          var liDate = $('<h3>');
+          liDate.text(fiveHumanDate);
+          liEl.append(liDate);
+      }
+  }

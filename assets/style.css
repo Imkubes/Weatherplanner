@@ -59,3 +59,7 @@ body {
 #currentConditions p {
     margin-bottom: 5px;
 }
+
+#currentConditions #uvi {
+    padding-bottom: 5px;
+}

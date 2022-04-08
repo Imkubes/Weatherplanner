@@ -65,17 +65,19 @@ fetch(queryURL)
 
 
       for (let i = 0; i < 5; i++) {
+          //Getting data for 5 days
           var fiveConditionsIcon = data.daily[i].weather[0].icon;
           var fiveTemp = data.daily[i].temp.day;
           var fiveWind = data.daily[i].wind_speed;
           var fiveHumidity = data.daily[i].humidity;
           var fiveUVI = data.daily[i].uvi;
+          //converting Unix time for 5 days into readable format
           var fiveUnixDate = data.daily[i].dt;
           var fMilliseconds = fiveUnixDate * 1000;
           var fiveDateObj = new Date(fMilliseconds);
           var fiveHumanDate = fiveDateObj.toLocaleString("en-us", {weekday: "long"});
 
-
+          //Creating a List element to add the data of 5 days to the html doc
           var liEl = $('<li class="fiveDayLi">')
           var liDate = $('<h3>');
           liDate.text(fiveHumanDate);

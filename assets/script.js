@@ -13,11 +13,14 @@ var lon = $('#lon');
 var fiveDayForecast = $('#fiveDayForecast');
 var recentSearchesEl = $('#recentSearches');
 
+// On click, rune the getCords function, and searchHistory function
 searchBtn.on('click', getCords);
 searchBtn.on('click', searchHistory);
 
 function getCords() {
+    //Setting search term to city name typed
     var searchTerm = citySearch.val();
+    //adding city name to local storage
     localStorage.setItem("city", searchTerm);
     var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=" + APIKey
     fetch(queryURL2)
@@ -30,12 +33,12 @@ function getCords() {
   })
 }
 
-
+// getting the latitude and longitude for the second API
   function getLatLon(data) {
      var lat = data.coord.lat
      var lon = data.coord.lon
      var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial"
-
+// fetching 2nd API for weather conditions
      fetch(queryURL)
   .then(function (response) {
       return response.json();
@@ -49,6 +52,7 @@ function getCords() {
 
 
   function addToPage(data) {
+      // Getting current weather data
       var cTemp = data.current.temp
       var cHumidity = data.current.humidity
       var cWindSpeed = data.current.wind_speed
@@ -108,7 +112,7 @@ function getCords() {
           fiveDayForecast.append(liEl);
       }
   }
-
+// displaying recent searches to the page
   function searchHistory() {
       var searchHistoryData = localStorage.getItem("city");
       for (var i = 0; i < localStorage.length; i++) {

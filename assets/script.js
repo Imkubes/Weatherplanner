@@ -42,6 +42,7 @@ fetch(queryURL)
       var cHumidity = data.current.humidity
       var cWindSpeed = data.current.wind_speed
       var cUvi = data.current.uvi
+      var cConditionsIcon = data.current.weather[0].icon;
       // Changing date to a readable format
       var CUnixDate = data.current.dt
       var milliseconds = CUnixDate * 1000
@@ -53,4 +54,5 @@ fetch(queryURL)
       humidity.text('Humidity: ' + cHumidity);
       windSpeed.text('Current Wind Speed: ' + cWindSpeed + ' MPH');
       uvi.text('UV Index: ' + cUvi);
+      conditonsIcon.text(cConditionsIcon);
   }

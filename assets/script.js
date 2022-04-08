@@ -1,19 +1,23 @@
 var APIKey = "36b80f9a86355f67ae521926147037ad";
-var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?q=duluth&appid=" + APIKey
-var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=44.8041&lon=-93.1669&appid=" + APIKey + "&units=imperial"
 var city = $('#city');
+var citySearch = $('#citySearch');
 var temp = $('#temp');
 var humidity = $('#humidity');
 var windSpeed = $('#windSpeed');
 var conditonsIcon = $('#conditionsIcon');
+var searchBtn = $('.submit');
 var date = $('#date');
 var uvi = $('#uvi');
 var lat = $('#lat');
 var lon = $('#lon');
 var fiveDayForecast = $('#fiveDayForecast');
 
+searchBtn.on('click', getCords)
 
-fetch(queryURL2)
+function getCords() {
+    var searchTerm = citySearch.val();
+    var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=" + APIKey
+    fetch(queryURL2)
   .then(function (response) {
       return response.json();
   })
@@ -21,14 +25,15 @@ fetch(queryURL2)
       console.log(data);
       getLatLon(data);
   })
+}
+
 
   function getLatLon(data) {
-      var lat = data.coord.lat
-      var lon = data.coord.lon
-  }
+     var lat = data.coord.lat
+     var lon = data.coord.lon
+     var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial"
 
-
-fetch(queryURL)
+     fetch(queryURL)
   .then(function (response) {
       return response.json();
   })
@@ -36,6 +41,8 @@ fetch(queryURL)
       console.log(data);
       addToPage(data);
   })
+  }
+
 
 
   function addToPage(data) {
@@ -94,7 +101,7 @@ fetch(queryURL)
           var liHumidity = $('<p>');
           liHumidity.text('Humidity: ' + fiveHumidity);
           liEl.append(liHumidity);
-
+            //Appending the list to the five day forecast
           fiveDayForecast.append(liEl);
       }
   }
